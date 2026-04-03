@@ -1,0 +1,15 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.my-list-property {
+    width: 100%;
+    height: 100%;
+    
+    border-color: darkgray;
+    border-style: dashed;
+    border-width: 2px;
+    overflow-y: scroll;
+}
+

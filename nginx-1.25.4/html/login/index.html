@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/lib/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/login/login.css" rel="stylesheet"/>
+    <script src="/lib/bootstrap-5.3.0-alpha1-dist/js/bootstrap.js"></script>
+    <script src="/lib/jQuery/jquery-3.7.1.min.js"></script>
+    <title>login</title>
+  </head>
+  <body style="background-image: url(/res/login0.jpg);">
+
+    <div style="width: 700px; height: auto;" class="center">
+      <form>
+        <div id="alertPlaceholder"></div>
+        <div class="mb-3">
+          <label for="inputIdentifier" class="form-label white">Email address / Phone number / Username</label>
+          <input type="text" class="form-control" id="inputIdentifier">
+        </div>
+        <div class="mb-3">
+          <label for="inputPassword" class="form-label white">Password</label>
+          <input type="password" class="form-control" id="inputPassword">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="checkboxRemember">
+          <label class="form-check-label white" for="checkboxRemember">Remember me</label>
+        </div>
+        <button type="button" class="btn btn-primary" id="buttonSubmit">Login</button>
+        <a href="/register" style="color: white; float: right;">Register?</a>
+      </form>
+    </div>
+
+    <script src="/login/login.js" type="module"></script>
+  </body>
+</html>

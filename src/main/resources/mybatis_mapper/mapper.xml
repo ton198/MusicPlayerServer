@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ton.musicplayer.dao.DatabaseMapper">
+
+    <select id="getUserByUserId" resultType="com.ton.musicplayer.entity.UserInfo">
+        SELECT * FROM user_info WHERE user_id=#{userId};
+    </select>
+
+    <select id="getMusicByMusicId" resultType="com.ton.musicplayer.entity.MusicInfo">
+        SELECT * FROM music_info WHERE music_id=#{musicId};
+    </select>
+
+    <select id="getFavoriteMusicsByUserId" resultType="com.ton.musicplayer.entity.MusicPublicFields">
+        SELECT m.music_id, m.name, m.owner, m.comment, m.mark
+        FROM music_info m, user_music_relation_info r
+        WHERE m.music_id=r.music_id AND r.user_id=#{userId}
+        LIMIT #{start}, #{limit};
+    </select>
+
+    <select id="getPublicMusics" resultType="com.ton.musicplayer.entity.MusicPublicFields">
+        SELECT music_id, name, owner, comment, mark
+        FROM music_info WHERE accessibility='public' LIMIT #{start}, #{limit};
+    </select>
+    
+    <select id="getMusicUrlByMusicMd5Code" resultType="string">
+        SELECT url FROM music_info WHERE lyric_md5_code=#{musicMd5Code} LIMIT 1;
+    </select>
+    
+    <select id="checkMusicExistsByMusicLyricMd5Code" resultType="_int">
+        SELECT EXISTS(SELECT music_info.music_id FROM music_info WHERE music_md5_code=#{musicMd5Code} AND lyric_md5_code=#{lyricMd5Code});
+    </select>
+
+    <select id="checkMusicExistsByMusicName" resultType="_int">
+        SELECT EXISTS(SELECT music_info.music_id FROM music_info WHERE name=#{name});
+    </select>
+    
+    <insert id="addMusic">
+        INSERT INTO music_info
+            (music_id, name, owner, accessibility, lyric, url, music_md5_code, lyric_md5_code)
+        VALUE
+            (#{musicId}, #{name}, #{owner}, #{accessibility}, #{lyric}, #{url}, #{musicMd5Code}, #{lyricMd5Code});
+    </insert>
+
+    <insert id="addRelation">
+        INSERT INTO user_music_relation_info(record_id, user_id, music_id)
+        VALUE (#{recordId}, #{userId}, #{musicId})
+    </insert>
+
+    <select id="checkPassword" resultType="_int">
+        SELECT EXISTS(SELECT user_info.user_id FROM user_info WHERE user_id=#{userId} AND password=#{password});
+    </select>
+
+    <select id="getUserIdByUsername" resultType="string">
+        SELECT user_info.user_id FROM user_info WHERE username=#{username};
+    </select>
+
+    <select id="getUserIdByEmail" resultType="string">
+        SELECT user_info.user_id FROM user_info WHERE email=#{email};
+    </select>
+
+    <select id="getUserIdByPhoneNumber" resultType="string">
+        SELECT user_info.user_id FROM user_info WHERE phone_number=#{phoneNumber};
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO user_info(user_id, username, password, email, phone_number)
+        VALUE (#{userId}, #{username}, #{password}, #{email}, #{phoneNumber});
+    </insert>
+
+    <select id="searchPublicMusics" resultType="com.ton.musicplayer.entity.MusicPublicFields">
+        SELECT music_info.music_id, music_info.name, music_info.owner, music_info.comment, music_info.mark
+        FROM music_info
+        WHERE music_info.name LIKE CONCAT('%', #{keywords},'%') AND
+              music_info.accessibility = 'PUBLIC'
+        LIMIT #{start}, #{limit};
+    </select>
+
+    <select id="searchOwnMusics" resultType="com.ton.musicplayer.entity.MusicPublicFields">
+        SELECT m.music_id, m.name, m.owner, m.comment, m.mark
+        FROM music_info m, user_music_relation_info r
+        WHERE m.name LIKE CONCAT('%', #{keywords},'%') AND
+              m.music_id = r.music_id AND
+              r.user_id = #{userId}
+        LIMIT #{start}, #{limit};
+    </select>
+
+    <select id="getLyricByMusicId" resultType="string">
+        SELECT music_info.lyric FROM mybatis.music_info WHERE music_info.music_id=#{musicId};
+    </select>
+
+    <select id="checkRelationExists" resultType="_int">
+        SELECT EXISTS(SELECT * FROM mybatis.user_music_relation_info WHERE user_id=#{userId} AND music_id=#{musicId});
+    </select>
+
+    <delete id="deleteRelation">
+        DELETE FROM user_music_relation_info WHERE user_id=#{userId} AND music_id=#{musicId};
+    </delete>
+</mapper>

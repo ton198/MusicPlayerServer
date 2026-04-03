@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/lib/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/lib/bootstrap-5.3.0-alpha1-dist/js/bootstrap.js"></script>
+    <script src="/lib/jQuery/jquery-3.7.1.min.js"></script>
+
+    <link href="/register/register.css" rel="stylesheet">
+
+    <title>register</title>
+  </head>
+  <body style="background-image: url(/res/login0.jpg);">
+
+    <div style="width: 700px; height: auto;" class="center">
+      <form>
+        <div id="alertPlaceholder"></div>
+        <div class="mb-3">
+          <label for="inputUsername" class="form-label white">Username</label>
+          <input type="text" class="form-control" id="inputUsername">
+        </div>
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label white">Email address</label>
+          <input type="text" class="form-control" id="inputEmail">
+        </div>
+        <div class="mb-3">
+          <label for="inputPhoneNumber" class="form-label white">Phone number</label>
+          <input type="text" class="form-control" id="inputPhoneNumber">
+        </div>
+        <div class="mb-3">
+          <label for="inputPassword" class="form-label white">Password</label>
+          <input type="password" class="form-control" id="inputPassword">
+        </div>
+        <div class="mb-3">
+          <label for="inputVerify" class="form-label white">VerificationCode</label>
+          <div class="" style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" id="inputVerify" style="flex-grow: 1; margin-right: 10px;">
+            <button type="button" class="btn btn-primary" id="buttonVerify">send</button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inputCaptcha" class="form-label white">Captcha</label>
+          <div class="" style="display: flex; flex-direction: row;">
+            <input type="text" class="form-control" id="inputCaptcha" style="flex-grow: 1; margin-right: 10px;">
+            <img id="imgCaptcha" width="100px" height="37px">
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="buttonSubmit">Register</button>
+      </form>
+    </div>
+
+    <script src="/register/register.js" type="module"></script>
+  </body>
+</html>

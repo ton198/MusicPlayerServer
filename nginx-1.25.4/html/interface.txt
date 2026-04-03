@@ -1,0 +1,87 @@
+login page:
+    address: "/post/login"
+    request: {
+        "identifier": "#username/#phone_number/#email",
+        "password": "#password"
+    }
+    response: {
+        "err": "NONE/NO_SUCH_USER/WRONG_PASSWORD"
+    }
+
+register page:
+    address: "/post/register"
+    request: {
+        "username": "#username",
+        "email": "#email",
+        "phone_number": "#phone_number",
+        "password": "#password",
+        "captcha_id": "#captcha_id",
+        "captcha_text": "captcha_text"
+    }
+    response: {
+        "err": "NONE/INVALID_REQUEST/UNKNOWN_ERROR/WRONG_CAPTCHA"
+    }
+
+download page:
+    address: "/post/download"
+    request: {
+        "music_id": "#music_id"
+    }
+    response: {
+        "err": "NONE/LOGIN_EXPIRED/NO_SUCH_MUSIC/NO_PERMISSION/UNKNOWN_ERROR",
+        "url": "#null/#url",
+        "lyric": "#null/#lyric"
+    }
+
+upload page:
+    address: "/post/upload"
+    request: {
+        "name": "#music_name",
+        "lyric": "#lyric",
+        "accessibility": "#accessibility",
+        "file": "#file_data"
+    }
+    response: {
+        "err": "NONE/ALREADY_EXIST/UNKNOWN_ERROR"
+    }
+
+search page:
+    address: "/post/search"
+    request: {
+        "keywords": "#keywords",
+        "location": "#location",
+        "page": "#page",
+        "search_id": "#search_id"
+    }
+    response: {
+        "err": "NONE/INVALID_REQUEST",
+        "result": [{
+            "music_id": "#music_id",
+            "name": "#name",
+            "owner": "#owner"
+            },
+            ...
+        ]
+    }
+
+favorite page:
+    address: "/post/add-favorite" or "/post/remove-favorite" or "/post/check-favorite"
+    request: {
+        "music_id": "#music_id",
+    }
+    response(add): {
+        "err": "NONE/INVALID_REQUEST/NO_SUCH_USER/NO_SUCH_MUSIC/ALREADY_EXIST/NO_PERMISSION"
+    }
+    response(remove): {
+        "err": "NONE/NO_SUCH_RELATION/INVALID_REQUEST"
+    }
+    response(check): {
+        "err": "NOT_IN_FAVORITES/IN_FAVORITES"
+    }
+
+captcha:
+    address: "/post/captcha"
+    request: {
+        "request_id": "#captcha unique id"
+    }
+    response: "jpeg"

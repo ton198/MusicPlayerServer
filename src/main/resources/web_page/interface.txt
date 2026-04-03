@@ -1,0 +1,72 @@
+login page:
+    address: "/post/login"
+    request: {
+        "identifier": "#username/#phone_number/#email",
+        "password": "#password"
+    }
+    response: {
+        "err": "NONE/NO_SUCH_USER/WRONG_PASSWORD"
+    }
+
+register page:
+    address: "/post/register"
+    request: {
+        "username": "#username",
+        "email": "#email",
+        "phone_number": "#phone_number",
+        "password": "#password",
+        "captcha_id": "#captcha_id",
+        "captcha_text": "captcha_text"
+    }
+    response: {
+        "err": "NONE/INVALID_REQUEST/UNKNOWN_ERROR/WRONG_CAPTCHA"
+    }
+
+download page:
+    address: "/post/download"
+    request: {
+        "music_id": "#music_id"
+    }
+    response: {
+        "err": "NONE/LOGIN_EXPIRED/NO_SUCH_MUSIC/NO_PERMISSION/UNKNOWN_ERROR",
+        "url": "#null/#url",
+        "lyric": "#null/#lyric"
+    }
+
+upload page:
+    address: "/post/upload"
+    request: {
+        "name": "#music_name",
+        "lyric": "#lyric",
+        "accessibility": "#accessibility",
+        "file": "#file_data"
+    }
+    response: {
+        "err": "NONE/ALREADY_EXIST/UNKNOWN_ERROR"
+    }
+
+search page:
+    address: "/post/search"
+    request: {
+        "keywords": "#keywords",
+        "location": "#location",
+        "page": "#page",
+        "search_id": "#search_id"
+    }
+    response: {
+        "err": "NONE/INVALID_REQUEST",
+        "result": [{
+            "music_id": "#music_id",
+            "name": "#name",
+            "owner": "#owner"
+            },
+            ...
+        ]
+    }
+
+captcha:
+    address: "/post/captcha"
+    request: {
+        "request_id": "#captcha unique id"
+    }
+    response: "jpeg"
